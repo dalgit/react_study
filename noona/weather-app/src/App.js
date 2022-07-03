@@ -37,7 +37,7 @@ function App() {
     //api는 대부분 json, json파일을 추출해야 데이터를 볼 수 있다.
     let data = await response.json(); //response에서 json추출을 할때까지 가다려줘
     setWeather(data);
-    setLoading(false)
+    setLoading(false);
   }
 
   const getWeatherByCity = async () => {
@@ -50,7 +50,6 @@ function App() {
   }
   //1. ui가 처음에 그려졌을때
   //2. 배열에 값이 있다면, 배열에 있는 state 값이 바뀔때
-
   useEffect(() => {
     if (city === "") {
       getCurrentLocation()
