@@ -9,9 +9,7 @@ const WeatherButton = ({ cities, setCity, handleCityChange, city }) => {
       <Button 
         variant={`${city === '' ? "outline-warning" : "warning"}`}
         onClick={() => handleCityChange("current")}
-      >
-        Current Location
-      </Button>
+      >Current Location</Button>
 
       {cities.map((item, index) => (
         <Button

@@ -42,7 +42,6 @@ function App() {
     let data = await response.json();
     setWeather(data);
     setLoading(false);
-    console.log(setCity);
   }
 
   const handleCityChange = (city)=>{
