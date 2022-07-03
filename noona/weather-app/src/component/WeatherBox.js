@@ -3,7 +3,6 @@ import React from 'react'
 // props라는 오브젝터에서 weather만 끌고옴
 // 이렇게하면 props.weather가 아닌 weather로 사용가능
 const WeatherBox = ({weather}) => {
-    console.log(weather)
   return (
     <div className="weather-box">
         {/* weather가 있어? 있으면 weather.name (삼항연산식임)  , 
