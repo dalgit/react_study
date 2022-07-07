@@ -1,8 +1,13 @@
 import React from 'react'
 import {Form, Button, Container} from "react-bootstrap"
-const Login = () => {
+import {useNavigate } from "react-router-dom"
+
+const Login = ({setAuthenticate}) => {
+    const navigate = useNavigate()
     const loginUser = (event) =>{
       event.preventDefault();       //form은 리프레쉬되기에 막아줘야함
+      setAuthenticate(true);
+      navigate("/")
     }
 
   return (
