@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from "react-router-dom"
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col, Alert, Dropdown, Button } from "react-bootstrap"
+
 const ProductDetail = () => {
-  let { id } = useParams()
   const [product,setProduct] = useState(null)
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  let { id } = useParams()
 
   const getProductDetail = async () => {
-    let url = `http://localhost:5000/products/${id}`
+    setLoading(true);
+    let url = `https://my-json-server.typicode.com/dalgit/react_study/tree/main/noona/hnm-react-router-practice/products/${id}`
     let response = await fetch(url)
     let data = await response.json();
+    setLoading(false);
     setProduct(data);
   };
 
@@ -16,20 +21,47 @@ const ProductDetail = () => {
     getProductDetail()
   }, []);
 
+  if (loading || product == null) return <h1>Loading</h1>
 
   return (
-    <Container>
+    <Container className="product-detail-card">
+      {error ? (
+        <Alert variant="danger" className="text-center">
+          {error}
+        </Alert>
+      ) : (
       <Row>
-        <Col className="product-img">
+        <Col className="product-detail-img">
           <img src={product?.img} alt="" />
         </Col>
         <Col>
-          <div>{product?.title}</div>
-          <div>{product?.price}</div>
+          <div className="product-info">{product?.title}</div>
+          <div className="product-info">₩{product?.price}</div>
+          <div className="choice">
+              {product.choice ? "Conscious choice" : ""}
+          </div>
+
+          <Dropdown className="drop-down">
+              <Dropdown.Toggle variant="outline-dark" id="dropdown-basic">
+                사이즈 선택
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                {product?.size.length > 0 &&
+                  product.size.map((item) => (
+                    <Dropdown.Item href="#/action-1">{item}</Dropdown.Item>
+                  ))}
+              </Dropdown.Menu>
+            </Dropdown>
+
+            <Button variant="dark" className="add-button">
+              추가
+            </Button>
+            
         </Col>
       </Row>
+      )}
     </Container>
   )
-}
-
-export default ProductDetail
+};
+export default ProductDetail;
